@@ -70,4 +70,65 @@ public class StringUtil {
 		String reg = "\\w+\\@\\w+\\.\\w+";
 		return str.matches(reg);
 	}
+	//判断全是字母
+	public static boolean isEnglish(String str) {
+		String reg = "[a-zA-Z]+";
+		return str.matches(reg);
+	}
+	/**
+	 * 字符串超过长度length后使用...显示
+	 * @Title: ellipsis 
+	 * @Description: TODO
+	 * @param str
+	 * @param length
+	 * @return
+	 * @return: String
+	 */
+	public String ellipsis(String str,Integer length) {
+		if(! StringUtil.hasText(str)) {
+			return "第一个参数不能为空";
+		}
+		return str.substring(0,length)+"...";
+	}
+	/**
+	* 隐藏一部分字符串  比如电话号码 身份证等 136****4589
+	 * @Title: hiddenStr 
+	 * @Description: TODO
+	 * @param str 源字符串
+	 * @param start 隐藏位置开始下标
+	 * @param end 移仓位置结束下标
+	 * @return
+	 * @return: String
+	 */
+	public static String hiddenStr(String str,Integer start,Integer end) {
+		if(! StringUtil.hasText(str)) {
+			return "第一个参数不能为空";
+		}
+		if(start > end) {
+			return "开始下标不能大于结束下标";
+		}
+		if(end > str.length()) {
+			return "结束下标不能大于字符串长度";
+		}
+		String str1 = str.substring(start,end);
+		String str2 = "";
+		for(int i = 0;i < str1.length();i++) {
+			str2 += "*";
+		}
+		return str.replaceFirst(str1, str2);
+	}
+	/**
+	 * 反转字符串
+	 * @Title: reverse 
+	 * @Description: TODO
+	 * @param str
+	 * @return
+	 * @return: String
+	 */
+	public static String reverse(String str) {
+		if(! StringUtil.hasText(str)) {
+			return "不能为空";
+		}
+		return new StringBuffer(str).reverse().toString();
+	}
 }

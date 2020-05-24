@@ -4,56 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
-//
-//	/**
-//	 * @Title: random 
-//	 * @Description: 获取一个min和max中间的随机日期
-//	 * @param min
-//	 * @param max
-//	 * @return
-//	 * @return: Date
-//	 */
-//	public static Date random(Date min,Date max) {
-//		long t1 = min.getTime();
-//		long t2 = max.getTime();
-//		long t = (long) (Math.random() * (t2 - t1) + t1);
-//		return new Date(t);
-//	}
-//	/**
-//	 * @Title: getInitMonth 
-//	 * @Description: 获取一个月的第一天
-//	 * @param date
-//	 * @return思路:Calendar中有一个将日期值更改的方法  改成1即可
-//	 * @return: Date
-//	 */
-//	public static Date getInitMonth(Date date) {
-//		Calendar c = Calendar.getInstance();
-//		c.setTime(date);
-//		c.set(Calendar.DAY_OF_MONTH, 1);
-//		//System.out.println(c.getTime());
-//		return c.getTime();
-//	}
-//	/**
-//	 * @Title: getEndMonth 
-//	 * @Description: 获取这个月的最后一天
-//	 * @param date
-//	 * 思路是:获取这个月第一天然后再减一天再将小时分钟都set为0
-//	 * @return: Date
-//	 */
-//	public static Date getEndMonth(Date date) {
-//		Calendar c = Calendar.getInstance();
-//		c.setTime(date);
-//		c.add(Calendar.MONTH, 1);
-//		Date initMonth = DateUtil.getInitMonth(c.getTime());
-//		c.setTime(initMonth);
-//		c.set(Calendar.HOUR_OF_DAY, 0);
-//		c.set(Calendar.MINUTE, 0);
-//		c.set(Calendar.SECOND, 0);
-//		c.add(Calendar.SECOND, -1);
-//		return c.getTime();
-//	}
 	/**
-	 * 返回date 减去指定小时的时间
+	 * 返回date 指定时间减去天数
 	 * 
 	 * @Title: SubDate
 	 * @Description: TODO
@@ -62,10 +14,10 @@ public class DateUtil {
 	 * @return
 	 * @return: Date
 	 */
-	public static Date SubDate(Date date, int hours) {
+	public static Date SubDate(Date date, int days) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);// 用传入的日期再次初始化日历类
-		c.add(Calendar.HOUR_OF_DAY, -hours);// 减去指定的小时
+		c.add(Calendar.DAY_OF_MONTH, days);//减去指定的小时
 		return c.getTime();
 	}
 
@@ -169,5 +121,58 @@ public class DateUtil {
 		long t = (long) (Math.random() * (t2 - t1) + t1);
 		return new Date(t);
 
+	}
+	/**
+	 * 人性化时间  例如 几年前 几月前  几分钟前  刚刚
+	 * @Title: getDisplayTime 
+	 * @Description: TODO
+	 * @param date
+	 * @return
+	 * @return: String
+	 */
+	public static String getDisplayTime(Date date) {
+		long t1 = date.getTime();
+		long t2 = new Date().getTime();
+		long t3 = t2 - t1;
+		if(t3 < 0) {
+			return "未来";
+		}
+		long minute = t3/60/1000;//获取分钟
+		 if(minute/60/24/30/12>=1) {
+			   return minute/60/24/30/12+"年前";
+		   }else if(minute/60/24/30>=1) {
+			   return minute/60/24/30+"月前";
+		   }else if(minute/60/24>=1) {
+			   return minute/60/24+"天前";
+		   }else if(minute/60>=1) {
+			   return minute/60+"小时前";
+		   }else if(minute>5) {
+			   return minute+"分钟前";
+		   }else {
+			   return "刚刚"; 
+		   }
+	}
+	/**
+	 * 获取季节  1-3春  4-6夏 7-9秋 10-12冬
+	 * @Title: getCurrentSeason 
+	 * @Description: TODO
+	 * @return
+	 * @return: String
+	 */
+	public static String getCurrentSeason() {
+		   Calendar c = Calendar.getInstance();
+		   int month = c.get(Calendar.MONTH) +1; 
+		   if(month<7) {
+			   if(month<4) {
+				   return "春季";
+			   }
+			   return "夏季";
+		   }else {
+			   if(month<10) {
+				   return "秋季";
+			   }
+			   return "冬季"; 
+		   }
+		   
 	}
 }
