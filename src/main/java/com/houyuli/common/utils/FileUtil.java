@@ -32,7 +32,6 @@ public class FileUtil {
 	public static File getTmpDir() {
 
 		return new File(System.getProperty("java.io.tmpdir"));
-		// TODO ÊµÏÖ´úÂë
 	}
 
 	/**

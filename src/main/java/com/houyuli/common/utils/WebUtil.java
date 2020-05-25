@@ -1,5 +1,7 @@
 package com.houyuli.common.utils;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class WebUtil {
 
 	public static String getUrl(HttpServletRequest request, String... ignoreParams) {
