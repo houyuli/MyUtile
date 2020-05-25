@@ -24,7 +24,6 @@ public class RandomUtil {
 	}
 
 	// 方法2：在最小值min与最大值max之间截取subs个不重复的随机数。例如在1-10之间取3个不重复的随机数，那么[2,6,9]是对的，[3,5,5]则不对，因为5重复了。应用场景：在100篇文章中随机取10篇文章，月考可能会使用到。
-	// (8分)
 	public static int[] subRandom(int min, int max, int subs) {
 		int[] result = new int[subs];
 		HashSet<Integer> set = new HashSet<>();

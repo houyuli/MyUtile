@@ -1,16 +1,17 @@
 package com.houyuli.common.utils;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class NumberUtil {
 	private static String NUMBER_REGEX = "[0-9]+";// 数字
 	private static String Real_REGEX = "^(-)?[0-9]+(\\.[0-9]+)?$";// 实数
 
 	/**
-	 * 功能：判断是否全部为实数 示例：
-	 *  NumberUtil.isNUmber("abc") -> false
-	 * NumberUtil.isNUmber("5.6") -> false
-	 *  NumberUtil.isNUmber("06") -> true
+	 * 功能：判断是否全部为实数 示例： NumberUtil.isNUmber("abc") -> false
+	 * NumberUtil.isNUmber("5.6") -> false NumberUtil.isNUmber("06") -> true
 	 * NumberUtil.isNUmber("1234") -> true
 	 */
 	public static boolean isReal(String src) {
@@ -20,10 +21,8 @@ public class NumberUtil {
 	}
 
 	/**
-	 * 功能：判断是否全部为数字 示例：
-	 *  NumberUtil.isNUmber("abc") -> false
-	 * NumberUtil.isNUmber("5.6") -> false
-	 *  NumberUtil.isNUmber("06") -> true
+	 * 功能：判断是否全部为数字 示例： NumberUtil.isNUmber("abc") -> false
+	 * NumberUtil.isNUmber("5.6") -> false NumberUtil.isNUmber("06") -> true
 	 * NumberUtil.isNUmber("1234") -> true
 	 */
 	public static boolean isNumber(String src) {
@@ -112,4 +111,33 @@ public class NumberUtil {
 		return b1.add(b2).doubleValue();
 	}
 
+	//
+	// 获取指定范围最大的整数
+	public static int nextInt(int max, int min) {
+		Random r = new Random();
+		return r.nextInt(max - min + 1) + min;
+	}
+	/**
+	 * 在两个值中间截取随机数
+	 * @Title: subIntegers 
+	 * @Description: TODO
+	 * @param min最小值
+	 * @param max最大值
+	 * @param subLength 获取个数
+	 * @return
+	 * @return: int[]
+	 */
+	public static int[] subIntegers(int min, int max, int subLength) {
+		int[] x = new int[subLength];
+		Set<Integer> set = new HashSet<Integer>();// 定义set集合用来过滤重复数据
+		while (set.size() < subLength) {
+			set.add(nextInt(min, max));
+		}
+		int j = 0;
+		for (Integer value : set) {// 遍历set集合,放入数组
+			x[j] = value;
+			j++;
+		}
+		return x;
+	}
 }
