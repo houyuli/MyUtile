@@ -106,7 +106,6 @@ public class FileUtil {
 
 		return file.getFreeSpace() / unit.getCode();
 
-		// TODO ÊµÏÖ´úÂë
 	}
 
 	/**
