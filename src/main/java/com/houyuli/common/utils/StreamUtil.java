@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StreamUtil {
-
+	//关闭流
 	public static void closings(AutoCloseable... closeables) {
 		if (closeables == null || closeables.length == 0)
 			throw new RuntimeException("参数异常");
@@ -26,8 +26,8 @@ public class StreamUtil {
 
 	}
 
+	//
 	public static String asString(InputStream ins, boolean isClose) {
-
 		byte[] b = new byte[1024];
 		int len = -1;
 		try {
@@ -52,7 +52,8 @@ public class StreamUtil {
 		return readingLineFormTextFile(new FileInputStream(textFile));
 
 	}
-
+	
+	//按照行读取 返回一个list集合
 	public static List<String> readingLineFormTextFile(InputStream inputStream) throws IOException {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
