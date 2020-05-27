@@ -3,6 +3,7 @@ package com.houyuli.common.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StreamUtil {
-	//关闭流
+	// 关闭流
 	public static void closings(AutoCloseable... closeables) {
 		if (closeables == null || closeables.length == 0)
 			throw new RuntimeException("参数异常");
@@ -47,22 +48,42 @@ public class StreamUtil {
 		return null;
 	}
 
-	@SuppressWarnings("resource")
-	public static List<String> readingLineFormTextFile(File textFile) throws IOException {
-		return readingLineFormTextFile(new FileInputStream(textFile));
-
-	}
-	
-	//按照行读取 返回一个list集合
-	public static List<String> readingLineFormTextFile(InputStream inputStream) throws IOException {
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		ArrayList<String> list = new ArrayList<String>();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			list.add(line);
+	/**
+	 * @Title: readTextFile
+	 * @Description: 传入一个文本文件对西昂,返回该文件内容
+	 * @param src
+	 * @return
+	 * @return: String
+	 */
+	public static String readTextFile(InputStream src) {
+		byte[] b = new byte[1024];
+		int len;
+		try {
+			while ((len = src.read(b)) != -1) {
+				return new String(b, 0, len, "UTF-8");
+				//return new String(b, 0, len);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return list;
+		return null;
+	}
 
+	/**
+	 * @Title: readTextFile
+	 * @Description: 传入文本文件对象，返回该文件内容 并且调用readTextFile方法
+	 * @param txtFile
+	 * @return
+	 * @return: String
+	 */
+	public static String readTextFile(File txtFile) {
+		try {
+			return readTextFile(new FileInputStream(txtFile));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
