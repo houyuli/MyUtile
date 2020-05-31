@@ -58,16 +58,17 @@ public class StreamUtil {
 	public static String readTextFile(InputStream src) {
 		byte[] b = new byte[1024];
 		int len;
+		String str = "";
 		try {
 			while ((len = src.read(b)) != -1) {
-				return new String(b, 0, len, "UTF-8");
+				str += new String(b, 0, len, "UTF-8");
 				//return new String(b, 0, len);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return str;
 	}
 
 	/**
