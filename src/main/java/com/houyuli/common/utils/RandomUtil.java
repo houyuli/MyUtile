@@ -3,6 +3,7 @@ package com.houyuli.common.utils;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 随机数处理工具类
@@ -55,5 +56,14 @@ public class RandomUtil {
 		}
 		return buf.toString();
 	}
-	
+
+	/**
+	 * 功能：获取不带横线的UUID 场景：上传文件时作为新文件名
+	 *
+	 * @return 不带横线的UUID
+	 */
+	public static String uuid() {
+		return UUID.randomUUID().toString().replace("-", "");
+	}
+
 }
