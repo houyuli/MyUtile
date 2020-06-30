@@ -87,4 +87,21 @@ public class StreamUtil {
 		}
 		return null;
 	}
+	/**
+	 * ∂¡»°“ª––
+	 * @Title: readLineFile 
+	 * @Description: TODO
+	 * @param txtFile
+	 * @return
+	 * @return: List<String>
+	 */
+	public static List<String> readLineFile(File txtFile){
+		String readTextFile = readTextFile(txtFile);
+		String[] split = readTextFile.split("\\n");
+		List<String> list = new ArrayList<String>();
+		for (String string : split) {
+			list.add(string);
+		}
+		return list;
+	}
 }

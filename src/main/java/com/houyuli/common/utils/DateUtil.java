@@ -6,13 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
-	//获取指定格式日期时间
-	public static String getString(Date date,String pattern) {
+	// 获取指定格式日期时间
+	public static String getString(Date date, String pattern) {
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 		return sdf.format(date);
 	}
-	//获取指定类型的日期对象
-	public static Date getDate(String str,String pattern) {
+
+	// 获取指定类型的日期对象
+	public static Date getDate(String str, String pattern) {
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 		try {
 			return sdf.parse(str);
@@ -23,6 +24,7 @@ public class DateUtil {
 		System.out.println("格式不正确");
 		return null;
 	}
+
 	/**
 	 * 返回date 指定时间减去天数
 	 * 
@@ -36,7 +38,7 @@ public class DateUtil {
 	public static Date SubDate(Date date, int days) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);// 用传入的日期再次初始化日历类
-		c.add(Calendar.DAY_OF_MONTH, days);//减去指定的小时
+		c.add(Calendar.DAY_OF_MONTH, days);// 减去指定的天数
 		return c.getTime();
 	}
 
@@ -90,7 +92,7 @@ public class DateUtil {
 		Calendar c = Calendar.getInstance();// 初始化一个日历类
 		// 用传入的日期初始化日历类
 		c.setTime(date);
-		//System.out.println(c.getTime());
+		// System.out.println(c.getTime());
 		// 设置这个月月初即：改变这个月的日期为第一天
 		c.set(Calendar.DAY_OF_MONTH, 1);// 设置天为1
 		c.set(Calendar.HOUR_OF_DAY, 0);// 设置小时为0
@@ -141,9 +143,11 @@ public class DateUtil {
 		return new Date(t);
 
 	}
+
 	/**
-	 * 人性化时间  例如 几年前 几月前  几分钟前  刚刚
-	 * @Title: getDisplayTime 
+	 * 人性化时间 例如 几年前 几月前 几分钟前 刚刚
+	 * 
+	 * @Title: getDisplayTime
 	 * @Description: TODO
 	 * @param date
 	 * @return
@@ -153,45 +157,47 @@ public class DateUtil {
 		long t1 = date.getTime();
 		long t2 = new Date().getTime();
 		long t3 = t2 - t1;
-		if(t3 < 0) {
+		if (t3 < 0) {
 			return "未来";
 		}
-		long minute = t3/60/1000;//获取分钟
-		 if(minute/60/24/30/12>=1) {
-			   return minute/60/24/30/12+"年前";
-		   }else if(minute/60/24/30>=1) {
-			   return minute/60/24/30+"月前";
-		   }else if(minute/60/24>=1) {
-			   return minute/60/24+"天前";
-		   }else if(minute/60>=1) {
-			   return minute/60+"小时前";
-		   }else if(minute>5) {
-			   return minute+"分钟前";
-		   }else {
-			   return "刚刚"; 
-		   }
+		long minute = t3 / 60 / 1000;// 获取分钟
+		if (minute / 60 / 24 / 30 / 12 >= 1) {
+			return minute / 60 / 24 / 30 / 12 + "年前";
+		} else if (minute / 60 / 24 / 30 >= 1) {
+			return minute / 60 / 24 / 30 + "月前";
+		} else if (minute / 60 / 24 >= 1) {
+			return minute / 60 / 24 + "天前";
+		} else if (minute / 60 >= 1) {
+			return minute / 60 + "小时前";
+		} else if (minute > 5) {
+			return minute + "分钟前";
+		} else {
+			return "刚刚";
+		}
 	}
+
 	/**
-	 * 获取季节  1-3春  4-6夏 7-9秋 10-12冬
-	 * @Title: getCurrentSeason 
+	 * 获取季节 1-3春 4-6夏 7-9秋 10-12冬
+	 * 
+	 * @Title: getCurrentSeason
 	 * @Description: TODO
 	 * @return
 	 * @return: String
 	 */
 	public static String getCurrentSeason() {
-		   Calendar c = Calendar.getInstance();
-		   int month = c.get(Calendar.MONTH) +1; 
-		   if(month<7) {
-			   if(month<4) {
-				   return "春季";
-			   }
-			   return "夏季";
-		   }else {
-			   if(month<10) {
-				   return "秋季";
-			   }
-			   return "冬季"; 
-		   }
-		   
+		Calendar c = Calendar.getInstance();
+		int month = c.get(Calendar.MONTH) + 1;
+		if (month < 7) {
+			if (month < 4) {
+				return "春季";
+			}
+			return "夏季";
+		} else {
+			if (month < 10) {
+				return "秋季";
+			}
+			return "冬季";
+		}
+
 	}
 }

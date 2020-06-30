@@ -1,6 +1,10 @@
 package com.houyuli.common.utils;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 public class FileUtil {
 
@@ -126,4 +130,22 @@ public class FileUtil {
 		f.delete();// 最后删除该目录中所有文件后就删除该目录
 	}
 
+	/**
+	 * 向一个文件中写入信息
+	 * 
+	 * @Title: writeToFile
+	 * @Description: TODO
+	 * @param path
+	 * @param content
+	 * @param charset
+	 * @throws Exception
+	 * @return: void
+	 */
+	public static void writeToFile(String path, String content, String charset) throws Exception {
+		File file = new File(path);
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
+		bw.write(content);
+		bw.flush();
+		bw.close();
+	}
 }
